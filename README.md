@@ -5,7 +5,7 @@ Adaption of the cult browser game `Inselkampf`
 
 ## Development
 
-###Preliminaries:
+### Preliminaries:
 
 Install [Truffle](truffleframework.com):
 
