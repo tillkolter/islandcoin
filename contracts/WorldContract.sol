@@ -1,12 +1,16 @@
 pragma solidity ^0.4.18;
 
+
 import './PlayerContract.sol';
+
 
 contract StoneThrower {
     uint8 offense = 10;
 
     uint8 defense = 10;
 }
+
+
 //
 //contract Attack {
 //    address attacker;
@@ -28,9 +32,11 @@ contract StoneThrower {
 contract Island {
 
     // Defines the army
-    struct Army {
-    uint stonethrowers;
-    }
+    //    struct Army {
+    //    uint stonethrowers;
+    //    }
+
+    uint[1] army;
 
     modifier requireIslandOwner {
         require(msg.sender == owner || msg.sender == WorldContract(world).owner());
@@ -39,7 +45,7 @@ contract Island {
 
     modifier requireIslandOwnerOrAttacked {
         require(tx.origin == owner
-            || false
+        || false
         );
         _;
     }
@@ -56,6 +62,7 @@ contract Island {
     }
 
     Transfer[] incomingTransfers;
+
     Transfer[] outgoingTransfers;
 
     enum ResearchType {Sail}
@@ -66,10 +73,12 @@ contract Island {
 
     WorldContract.MapPosition public position;
 
-    Army army;
+    //    Army army;
 
     address world;
+
     uint public oceanX;
+
     uint public oceanY;
 
     mapping (bytes32 => uint8) techLevels;
@@ -82,12 +91,12 @@ contract Island {
         oceanX = _oceanX;
         oceanY = _oceanY;
 
-        army.stonethrowers = 10;
+        army = [uint(10)];
 
-//        position.x = _oceanX;
-//        position.y = _oceanY;
-//        position.xDimension = positionX;
-//        position.yDimension = positionY;
+        //        position.x = _oceanX;
+        //        position.y = _oceanY;
+        //        position.xDimension = positionX;
+        //        position.yDimension = positionY;
     }
 
     function getSerialized()
@@ -98,8 +107,13 @@ contract Island {
     }
 
 
-    function getArmy() requireIslandOwnerOrAttacked public constant returns (Army) {
+    function getArmy() public constant returns (uint[1]) {
         return army;
+    }
+
+    function setArmy(uint[1] _army) requireWorldOwner public returns (bool) {
+        army = _army;
+        return true;
     }
 
     function getTechLevel(WorldContract.ResourceType resourceType) public constant returns (uint8) {
@@ -107,7 +121,7 @@ contract Island {
     }
 
     function isArmed() private constant returns (bool) {
-        return army.stonethrowers > 0;
+        return army[0] > 0;
     }
 
     function isEmpty() public constant returns (bool) {
@@ -115,6 +129,7 @@ contract Island {
     }
 
     mapping (address => WorldContract.Attack) attacks;
+
     function isAttacked(address defender) public constant returns (bool) {
         return attacks[defender].victim == defender;
     }
@@ -137,7 +152,7 @@ contract Island {
         return true;
     }
 
-    function attack(address targetIsland, Army army) {
+    function attack(address targetIsland, uint[1] army) {
         WorldContract worldInstance = WorldContract(world);
         worldInstance.setAttack(this, targetIsland, army);
     }
@@ -146,13 +161,13 @@ contract Island {
         selfdestruct(WorldContract(world).owner());
     }
 
-//    function getAttacks()
-//    public
-//    constant
-//    returns (WorldContract.Attack[]) {
-//        require(tx.origin == owner || tx.origin == WorldContract(world).owner());
-//        return WorldContract(world).getAttacks(this);
-//    }
+    //    function getAttacks()
+    //    public
+    //    constant
+    //    returns (WorldContract.Attack[]) {
+    //        require(tx.origin == owner || tx.origin == WorldContract(world).owner());
+    //        return WorldContract(world).getAttacks(this);
+    //    }
 
 }
 
@@ -185,16 +200,20 @@ contract WorldContract is GameContract {
     struct Attack {
     address attacker;
     address victim;
+    address defender;
     uint arrivalTime;
     uint index;
-    Island.Army army;
+    uint[1] army;
     }
 
     Attack[] attacksIndex;
+
     mapping (address => Attack[]) attacksPerUser;
+
     mapping (address => Attack[]) attacks;
 
     Attack[] defendsIndex;
+
     mapping (address => Attack[]) defends;
 
     // Creator/Superuser of a world
@@ -206,6 +225,7 @@ contract WorldContract is GameContract {
     mapping (address => address[]) playerIslands;
 
     mapping (address => IslandAddress) islands;
+
     mapping (bytes32 => IslandAddress) islandsPositions;
 
     IslandAddress[] islandIndex;
@@ -225,8 +245,8 @@ contract WorldContract is GameContract {
     }
 
     function isFree(uint oceanX, uint oceanY, uint8 positionX, uint8 positionY) private constant returns (bool) {
-//        return true;
-//        require(oceanX <= xDimension && oceanY <= yDimension);
+        //        return true;
+        //        require(oceanX <= xDimension && oceanY <= yDimension);
         if (islandIndex.length == 0) return true;
         bytes32 positionHash = keccak256(oceanX, oceanY, positionX, positionY, owner);
         return islandIndex[islandsPositions[positionHash].index].positionHash != positionHash;
@@ -274,90 +294,108 @@ contract WorldContract is GameContract {
         }
     }
 
-    function getETA(Island.Army army) public constant returns (uint) {
-        return now + 5 minutes;  // + 5 minutes;
+    function getETA(uint[1] army) public constant returns (uint) {
+        return now + 5 minutes;
+        // + 5 minutes;
     }
 
     function somethingNew(address user) public constant returns (bool) {
         for (uint i = 0; i < attacksPerUser[user].length; i++) {
-            if (attacksPerUser[user][i].arrivalTime < now) {
+            if (attacksIndex[attacksPerUser[user][i].index].arrivalTime < now) {
                 return true;
             }
         }
         return attacks[user].length > 0;
     }
 
-    function isDead(Island.Army army) public constant returns (bool) {
-        return army.stonethrowers < 1;
+    function isDead(uint[1] army) public constant returns (bool) {
+        return army[0] < 1;
     }
 
-    function fight(address attacker, Island.Army army, address defender) public returns (bool) {
+    function isContract(address addr) returns (bool) {
+        uint size;
+        assembly { size := extcodesize(addr) }
+        return size > 0;
+    }
+
+    function max(uint a, uint b) private pure returns (uint) {
+        return a > b ? a : b;
+    }
+
+    function fight(address attacker, address defender, uint[1] army) public returns (uint[1]) {
+        require(isContract(defender));
         Island defendingIsland = Island(defender);
-        Island.Army memory defArmy = defendingIsland.getArmy();
+        uint[1] memory defArmy = defendingIsland.getArmy();
         while (!isDead(army) && !isDead(defArmy)) {
             uint randomDefense = uint(keccak256(block.timestamp)) % 10 + 1;
             uint randomAttack = uint(keccak256(block.timestamp)) % 10 + 1;
-            defArmy.stonethrowers - randomAttack;
-            army.stonethrowers - randomDefense;
+            if (randomAttack >= defArmy[0]) {
+                defArmy[0] = 0;
+            } else {
+                defArmy[0] -= randomAttack;
+            }
+            if (randomDefense >= defArmy[0]) {
+                army[0] = 0;
+            } else {
+                army[0] -= randomDefense;
+            }
         }
-        return isDead(defArmy);
+        defendingIsland.setArmy(defArmy);
+        return army;
     }
 
     function updateWorld(address user) public returns (bool) {
         if (somethingNew(user)) {
-            for (uint i = 0; i < attacks[user].length; i++) {
-                if (attacks[user][i].arrivalTime < now) {
-                    fight(attacks[user][i].attacker, attacks[user][i].army, user);
-
-                }
+            for (uint i = 0; i < attacksPerUser[user].length; i++) {
+                attacksPerUser[user][i].army = fight(
+                    attacksIndex[attacksPerUser[user][i].index].attacker,
+                    attacksIndex[attacksPerUser[user][i].index].defender,
+                    attacksIndex[attacksPerUser[user][i].index].army
+                );
+                attacksIndex[attacksPerUser[user][i].index].army = attacksPerUser[user][i].army;
             }
-            for (uint j = 0; j < defends[user].length; j++) {
-                if (defends[user][i].arrivalTime < now) {
-                    fight(user, defends[user][i].army, defends[user][i].victim);
-                }
-            }
+//            for (uint j = 0; j < defends[user].length; j++) {
+//                if (defends[user][i].arrivalTime < now) {
+//                    fight(user, defends[user][i].army, defends[user][i].victim);
+//                }
+//            }
             return true;
         }
         return false;
     }
 
-    function setAttack(address attacker, address victim, Island.Army army, uint eta) public onlyOwner returns (bool) {
-        Attack attack;
-        attack.attacker = attacker;
-        attack.victim = victim;
-        attack.arrivalTime = eta;
-        attack.index = attacksIndex.length;
-        attack.army = army;
-        attacksIndex.push(attack);
-        attacksPerUser[Island(attacker).owner()].push(attack);
-        attacks[attacker].push(attack);
-        defends[victim].push(attack);
-        return true;
+    function setAttackSuperuser(address attacker, address defender, uint[1] army, uint eta) public onlyOwner returns (uint) {
+        uint attackIndex = setAttack(attacker, defender, army);
+        attacksIndex[attackIndex].arrivalTime = eta;
+        return attackIndex;
     }
 
-    function setAttack(address attacker, address victim, Island.Army army) public returns (bool) {
+    function setAttack(address attacker, address defender, uint[1] army) public returns (uint) {
         uint arrivalTime = getETA(army);
         Attack attack;
         attack.attacker = attacker;
-        attack.victim = victim;
+        attack.defender = defender;
         attack.arrivalTime = arrivalTime;
         attack.index = attacksIndex.length;
         attack.army = army;
         attacksIndex.push(attack);
         attacksPerUser[Island(attacker).owner()].push(attack);
         attacks[attacker].push(attack);
-        defends[victim].push(attack);
-        return true;
+        defends[defender].push(attack);
+        return attack.index;
     }
 
     function getAttacks(address island) public constant returns (Attack[]){
         require(tx.origin == Island(island).owner());
-//        Attack[] myArray =
         return attacks[island];
     }
 
-    function kill() public view {
-        require(msg.sender == owner);
+    function isSunkenShip(uint attackIndex) public constant returns (bool) {
+        return isDead(attacksIndex[attackIndex].army);
+    }
+
+    function kill() public onlyOwner view {
+        selfdestruct(owner);
     }
 
 }
