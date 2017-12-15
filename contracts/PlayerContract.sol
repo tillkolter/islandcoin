@@ -21,7 +21,7 @@ contract PlayerContract {
         game = _game;
     }
 
-    function kill() public {
+    function kill() public view {
         require(GameContract(game).owner() == msg.sender);
     }
 }

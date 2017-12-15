@@ -5,6 +5,6 @@ contract GameContract {
     address public owner;
 
     function GameContract() public {
-        owner = msg.sender;
+        owner = tx.origin;
     }
 }

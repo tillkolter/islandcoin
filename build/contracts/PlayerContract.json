@@ -2,12 +2,12 @@
   "contractName": "PlayerContract",
   "abi": [
     {
-      "constant": false,
+      "constant": true,
       "inputs": [],
       "name": "kill",
       "outputs": [],
       "payable": false,
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -45,18 +45,18 @@
       "type": "constructor"
     }
   ],
-  "bytecode": "0x6060604052341561000f57600080fd5b60405160208061033583398101604052808051906020019091905050806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550506102ba8061007b6000396000f30060606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063e2eb41ff14610066575b600080fd5b341561005c57600080fd5b610064610168565b005b341561007157600080fd5b61009d600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190505061024b565b60405180806020018373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281038252848181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156101585780601f1061012d57610100808354040283529160200191610158565b820191906000526020600020905b81548152906001019060200180831161013b57829003601f168201915b5050935050505060405180910390f35b3373ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16638da5cb5b6000604051602001526040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b151561020c57600080fd5b6102c65a03f1151561021d57600080fd5b5050506040518051905073ffffffffffffffffffffffffffffffffffffffff1614151561024957600080fd5b565b600160205280600052604060002060009150905080600001908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050825600a165627a7a7230582040f57e1a64ad22467b8bbd861e259e0b5e4faacf0586efe385f4fa0949ea65980029",
-  "deployedBytecode": "0x60606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063e2eb41ff14610066575b600080fd5b341561005c57600080fd5b610064610168565b005b341561007157600080fd5b61009d600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190505061024b565b60405180806020018373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281038252848181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156101585780601f1061012d57610100808354040283529160200191610158565b820191906000526020600020905b81548152906001019060200180831161013b57829003601f168201915b5050935050505060405180910390f35b3373ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16638da5cb5b6000604051602001526040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b151561020c57600080fd5b6102c65a03f1151561021d57600080fd5b5050506040518051905073ffffffffffffffffffffffffffffffffffffffff1614151561024957600080fd5b565b600160205280600052604060002060009150905080600001908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050825600a165627a7a7230582040f57e1a64ad22467b8bbd861e259e0b5e4faacf0586efe385f4fa0949ea65980029",
-  "sourceMap": "56:468:2:-;;;352:75;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;415:5;408:4;;:12;;;;;;;;;;;;;;;;;;352:75;56:468;;;;;;",
-  "deployedSourceMap": "56:468:2:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;433:89;;;;;;;;;;;;;;277:42;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;433:89;504:10;474:40;;487:4;;;;;;;;;;;474:24;;;:26;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:40;;;466:49;;;;;;;;433:89::o;277:42::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
-  "source": "pragma solidity ^0.4.18;\n\nimport './GameContract.sol';\n\ncontract PlayerContract {\n\n    // Represents a player of the game\n    struct Player {\n    // username of the player\n    string username;\n    // public key of the player\n    address identity;\n    }\n\n    address game;\n\n    mapping (address => Player) public players;\n    Player[] playerIndex;\n\n    function PlayerContract(address _game) public {\n        game = _game;\n    }\n\n    function kill() public {\n        require(GameContract(game).owner() == msg.sender);\n    }\n}\n",
+  "bytecode": "0x6060604052341561000f57600080fd5b60405160208061033583398101604052808051906020019091905050806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550506102ba8061007b6000396000f30060606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063e2eb41ff14610066575b600080fd5b341561005c57600080fd5b610064610168565b005b341561007157600080fd5b61009d600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190505061024b565b60405180806020018373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281038252848181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156101585780601f1061012d57610100808354040283529160200191610158565b820191906000526020600020905b81548152906001019060200180831161013b57829003601f168201915b5050935050505060405180910390f35b3373ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16638da5cb5b6000604051602001526040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b151561020c57600080fd5b6102c65a03f1151561021d57600080fd5b5050506040518051905073ffffffffffffffffffffffffffffffffffffffff1614151561024957600080fd5b565b600160205280600052604060002060009150905080600001908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050825600a165627a7a72305820067841dfe8ff1568373c0cce65810eb25dd00059dc7c2fd6e3ba488dfa554d180029",
+  "deployedBytecode": "0x60606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063e2eb41ff14610066575b600080fd5b341561005c57600080fd5b610064610168565b005b341561007157600080fd5b61009d600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190505061024b565b60405180806020018373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281038252848181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156101585780601f1061012d57610100808354040283529160200191610158565b820191906000526020600020905b81548152906001019060200180831161013b57829003601f168201915b5050935050505060405180910390f35b3373ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16638da5cb5b6000604051602001526040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b151561020c57600080fd5b6102c65a03f1151561021d57600080fd5b5050506040518051905073ffffffffffffffffffffffffffffffffffffffff1614151561024957600080fd5b565b600160205280600052604060002060009150905080600001908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050825600a165627a7a72305820067841dfe8ff1568373c0cce65810eb25dd00059dc7c2fd6e3ba488dfa554d180029",
+  "sourceMap": "56:473:1:-;;;352:75;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;415:5;408:4;;:12;;;;;;;;;;;;;;;;;;352:75;56:473;;;;;;",
+  "deployedSourceMap": "56:473:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;433:94;;;;;;;;;;;;;;277:42;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;433:94;509:10;479:40;;492:4;;;;;;;;;;;479:24;;;:26;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:40;;;471:49;;;;;;;;433:94::o;277:42::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.18;\n\nimport './GameContract.sol';\n\ncontract PlayerContract {\n\n    // Represents a player of the game\n    struct Player {\n    // username of the player\n    string username;\n    // public key of the player\n    address identity;\n    }\n\n    address game;\n\n    mapping (address => Player) public players;\n    Player[] playerIndex;\n\n    function PlayerContract(address _game) public {\n        game = _game;\n    }\n\n    function kill() public view {\n        require(GameContract(game).owner() == msg.sender);\n    }\n}\n",
   "sourcePath": "/Users/tillkolter/work/me/islandcoin/contracts/PlayerContract.sol",
   "ast": {
     "attributes": {
       "absolutePath": "/Users/tillkolter/work/me/islandcoin/contracts/PlayerContract.sol",
       "exportedSymbols": {
         "PlayerContract": [
-          113
+          56
         ]
       }
     },
@@ -70,24 +70,24 @@
             ".18"
           ]
         },
-        "id": 72,
+        "id": 15,
         "name": "PragmaDirective",
-        "src": "0:24:2"
+        "src": "0:24:1"
       },
       {
         "attributes": {
           "SourceUnit": 14,
           "absolutePath": "/Users/tillkolter/work/me/islandcoin/contracts/GameContract.sol",
           "file": "./GameContract.sol",
-          "scope": 114,
+          "scope": 57,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 73,
+        "id": 16,
         "name": "ImportDirective",
-        "src": "26:28:2"
+        "src": "26:28:1"
       },
       {
         "attributes": {
@@ -101,17 +101,17 @@
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            113
+            56
           ],
           "name": "PlayerContract",
-          "scope": 114
+          "scope": 57
         },
         "children": [
           {
             "attributes": {
               "canonicalName": "PlayerContract.Player",
               "name": "Player",
-              "scope": 113,
+              "scope": 56,
               "visibility": "public"
             },
             "children": [
@@ -119,7 +119,7 @@
                 "attributes": {
                   "constant": false,
                   "name": "username",
-                  "scope": 78,
+                  "scope": 21,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "string storage pointer",
@@ -132,20 +132,20 @@
                       "name": "string",
                       "type": "string storage pointer"
                     },
-                    "id": 74,
+                    "id": 17,
                     "name": "ElementaryTypeName",
-                    "src": "176:6:2"
+                    "src": "176:6:1"
                   }
                 ],
-                "id": 75,
+                "id": 18,
                 "name": "VariableDeclaration",
-                "src": "176:15:2"
+                "src": "176:15:1"
               },
               {
                 "attributes": {
                   "constant": false,
                   "name": "identity",
-                  "scope": 78,
+                  "scope": 21,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "address",
@@ -158,25 +158,25 @@
                       "name": "address",
                       "type": "address"
                     },
-                    "id": 76,
+                    "id": 19,
                     "name": "ElementaryTypeName",
-                    "src": "229:7:2"
+                    "src": "229:7:1"
                   }
                 ],
-                "id": 77,
+                "id": 20,
                 "name": "VariableDeclaration",
-                "src": "229:16:2"
+                "src": "229:16:1"
               }
             ],
-            "id": 78,
+            "id": 21,
             "name": "StructDefinition",
-            "src": "126:126:2"
+            "src": "126:126:1"
           },
           {
             "attributes": {
               "constant": false,
               "name": "game",
-              "scope": 113,
+              "scope": 56,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "address",
@@ -189,20 +189,20 @@
                   "name": "address",
                   "type": "address"
                 },
-                "id": 79,
+                "id": 22,
                 "name": "ElementaryTypeName",
-                "src": "258:7:2"
+                "src": "258:7:1"
               }
             ],
-            "id": 80,
+            "id": 23,
             "name": "VariableDeclaration",
-            "src": "258:12:2"
+            "src": "258:12:1"
           },
           {
             "attributes": {
               "constant": false,
               "name": "players",
-              "scope": 113,
+              "scope": 56,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "mapping(address => struct PlayerContract.Player storage ref)",
@@ -220,36 +220,36 @@
                       "name": "address",
                       "type": "address"
                     },
-                    "id": 81,
+                    "id": 24,
                     "name": "ElementaryTypeName",
-                    "src": "286:7:2"
+                    "src": "286:7:1"
                   },
                   {
                     "attributes": {
                       "contractScope": null,
                       "name": "Player",
-                      "referencedDeclaration": 78,
+                      "referencedDeclaration": 21,
                       "type": "struct PlayerContract.Player storage pointer"
                     },
-                    "id": 82,
+                    "id": 25,
                     "name": "UserDefinedTypeName",
-                    "src": "297:6:2"
+                    "src": "297:6:1"
                   }
                 ],
-                "id": 83,
+                "id": 26,
                 "name": "Mapping",
-                "src": "277:27:2"
+                "src": "277:27:1"
               }
             ],
-            "id": 84,
+            "id": 27,
             "name": "VariableDeclaration",
-            "src": "277:42:2"
+            "src": "277:42:1"
           },
           {
             "attributes": {
               "constant": false,
               "name": "playerIndex",
-              "scope": 113,
+              "scope": 56,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "struct PlayerContract.Player storage ref[] storage ref",
@@ -267,22 +267,22 @@
                     "attributes": {
                       "contractScope": null,
                       "name": "Player",
-                      "referencedDeclaration": 78,
+                      "referencedDeclaration": 21,
                       "type": "struct PlayerContract.Player storage pointer"
                     },
-                    "id": 85,
+                    "id": 28,
                     "name": "UserDefinedTypeName",
-                    "src": "325:6:2"
+                    "src": "325:6:1"
                   }
                 ],
-                "id": 86,
+                "id": 29,
                 "name": "ArrayTypeName",
-                "src": "325:8:2"
+                "src": "325:8:1"
               }
             ],
-            "id": 87,
+            "id": 30,
             "name": "VariableDeclaration",
-            "src": "325:20:2"
+            "src": "325:20:1"
           },
           {
             "attributes": {
@@ -294,7 +294,7 @@
               ],
               "name": "PlayerContract",
               "payable": false,
-              "scope": 113,
+              "scope": 56,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -306,7 +306,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_game",
-                      "scope": 97,
+                      "scope": 40,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -319,19 +319,19 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 88,
+                        "id": 31,
                         "name": "ElementaryTypeName",
-                        "src": "376:7:2"
+                        "src": "376:7:1"
                       }
                     ],
-                    "id": 89,
+                    "id": 32,
                     "name": "VariableDeclaration",
-                    "src": "376:13:2"
+                    "src": "376:13:1"
                   }
                 ],
-                "id": 90,
+                "id": 33,
                 "name": "ParameterList",
-                "src": "375:15:2"
+                "src": "375:15:1"
               },
               {
                 "attributes": {
@@ -340,9 +340,9 @@
                   ]
                 },
                 "children": [],
-                "id": 91,
+                "id": 34,
                 "name": "ParameterList",
-                "src": "398:0:2"
+                "src": "398:0:1"
               },
               {
                 "children": [
@@ -365,13 +365,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 80,
+                              "referencedDeclaration": 23,
                               "type": "address",
                               "value": "game"
                             },
-                            "id": 92,
+                            "id": 35,
                             "name": "Identifier",
-                            "src": "408:4:2"
+                            "src": "408:4:1"
                           },
                           {
                             "attributes": {
@@ -379,37 +379,37 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 89,
+                              "referencedDeclaration": 32,
                               "type": "address",
                               "value": "_game"
                             },
-                            "id": 93,
+                            "id": 36,
                             "name": "Identifier",
-                            "src": "415:5:2"
+                            "src": "415:5:1"
                           }
                         ],
-                        "id": 94,
+                        "id": 37,
                         "name": "Assignment",
-                        "src": "408:12:2"
+                        "src": "408:12:1"
                       }
                     ],
-                    "id": 95,
+                    "id": 38,
                     "name": "ExpressionStatement",
-                    "src": "408:12:2"
+                    "src": "408:12:1"
                   }
                 ],
-                "id": 96,
+                "id": 39,
                 "name": "Block",
-                "src": "398:29:2"
+                "src": "398:29:1"
               }
             ],
-            "id": 97,
+            "id": 40,
             "name": "FunctionDefinition",
-            "src": "352:75:2"
+            "src": "352:75:1"
           },
           {
             "attributes": {
-              "constant": false,
+              "constant": true,
               "implemented": true,
               "isConstructor": false,
               "modifiers": [
@@ -417,8 +417,8 @@
               ],
               "name": "kill",
               "payable": false,
-              "scope": 113,
-              "stateMutability": "nonpayable",
+              "scope": 56,
+              "stateMutability": "view",
               "superFunction": null,
               "visibility": "public"
             },
@@ -430,9 +430,9 @@
                   ]
                 },
                 "children": [],
-                "id": 98,
+                "id": 41,
                 "name": "ParameterList",
-                "src": "446:2:2"
+                "src": "446:2:1"
               },
               {
                 "attributes": {
@@ -441,9 +441,9 @@
                   ]
                 },
                 "children": [],
-                "id": 99,
+                "id": 42,
                 "name": "ParameterList",
-                "src": "456:0:2"
+                "src": "461:0:1"
               },
               {
                 "children": [
@@ -475,13 +475,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 730,
+                              "referencedDeclaration": 1093,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
-                            "id": 100,
+                            "id": 43,
                             "name": "Identifier",
-                            "src": "466:7:2"
+                            "src": "471:7:1"
                           },
                           {
                             "attributes": {
@@ -560,9 +560,9 @@
                                               "type": "type(contract GameContract)",
                                               "value": "GameContract"
                                             },
-                                            "id": 101,
+                                            "id": 44,
                                             "name": "Identifier",
-                                            "src": "474:12:2"
+                                            "src": "479:12:1"
                                           },
                                           {
                                             "attributes": {
@@ -570,28 +570,28 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 80,
+                                              "referencedDeclaration": 23,
                                               "type": "address",
                                               "value": "game"
                                             },
-                                            "id": 102,
+                                            "id": 45,
                                             "name": "Identifier",
-                                            "src": "487:4:2"
+                                            "src": "492:4:1"
                                           }
                                         ],
-                                        "id": 103,
+                                        "id": 46,
                                         "name": "FunctionCall",
-                                        "src": "474:18:2"
+                                        "src": "479:18:1"
                                       }
                                     ],
-                                    "id": 104,
+                                    "id": 47,
                                     "name": "MemberAccess",
-                                    "src": "474:24:2"
+                                    "src": "479:24:1"
                                   }
                                 ],
-                                "id": 105,
+                                "id": 48,
                                 "name": "FunctionCall",
-                                "src": "474:26:2"
+                                "src": "479:26:1"
                               },
                               {
                                 "attributes": {
@@ -611,59 +611,65 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 727,
+                                      "referencedDeclaration": 1090,
                                       "type": "msg",
                                       "value": "msg"
                                     },
-                                    "id": 106,
+                                    "id": 49,
                                     "name": "Identifier",
-                                    "src": "504:3:2"
+                                    "src": "509:3:1"
                                   }
                                 ],
-                                "id": 107,
+                                "id": 50,
                                 "name": "MemberAccess",
-                                "src": "504:10:2"
+                                "src": "509:10:1"
                               }
                             ],
-                            "id": 108,
+                            "id": 51,
                             "name": "BinaryOperation",
-                            "src": "474:40:2"
+                            "src": "479:40:1"
                           }
                         ],
-                        "id": 109,
+                        "id": 52,
                         "name": "FunctionCall",
-                        "src": "466:49:2"
+                        "src": "471:49:1"
                       }
                     ],
-                    "id": 110,
+                    "id": 53,
                     "name": "ExpressionStatement",
-                    "src": "466:49:2"
+                    "src": "471:49:1"
                   }
                 ],
-                "id": 111,
+                "id": 54,
                 "name": "Block",
-                "src": "456:66:2"
+                "src": "461:66:1"
               }
             ],
-            "id": 112,
+            "id": 55,
             "name": "FunctionDefinition",
-            "src": "433:89:2"
+            "src": "433:94:1"
           }
         ],
-        "id": 113,
+        "id": 56,
         "name": "ContractDefinition",
-        "src": "56:468:2"
+        "src": "56:473:1"
       }
     ],
-    "id": 114,
+    "id": 57,
     "name": "SourceUnit",
-    "src": "0:525:2"
+    "src": "0:530:1"
   },
   "compiler": {
     "name": "solc",
     "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "4447": {
+      "events": {},
+      "links": {},
+      "address": "0xf25186b5081ff5ce73482ad761db0eb0d25abfbf"
+    }
+  },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2017-12-12T13:44:45.018Z"
+  "updatedAt": "2017-12-15T10:24:40.026Z"
 }

@@ -1,0 +1,362 @@
+{
+  "contractName": "SafeSend",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "recipient",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "deliver",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_recipient",
+          "type": "address"
+        }
+      ],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x60606040526040516020806101b683398101604052808051906020019091905050806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050610146806100706000396000f30060606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806366d003ac14610051578063fd3e50a7146100a6575b600080fd5b341561005c57600080fd5b6100646100bb565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156100b157600080fd5b6100b96100e0565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff00a165627a7a7230582093267ca3b1f66b7c04ccd9ca67e17d2d4a2a88ed7f81d01135cc700414a723310029",
+  "deployedBytecode": "0x60606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806366d003ac14610051578063fd3e50a7146100a6575b600080fd5b341561005c57600080fd5b6100646100bb565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156100b157600080fd5b6100b96100e0565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff00a165627a7a7230582093267ca3b1f66b7c04ccd9ca67e17d2d4a2a88ed7f81d01135cc700414a723310029",
+  "sourceMap": "25:191:0:-;;;78:79;;;;;;;;;;;;;;;;;;;;;;142:10;130:9;;:22;;;;;;;;;;;;;;;;;;78:79;25:191;;;;;;",
+  "deployedSourceMap": "25:191:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;47:24;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;161:53;;;;;;;;;;;;;;47:24;;;;;;;;;;;;;:::o;161:53::-;199:9;;;;;;;;;;;186:23;;",
+  "source": "pragma solidity ^0.4.8;\n\ncontract SafeSend {\n  address public recipient;\n  \n  function SafeSend(address _recipient) payable {\n    recipient = _recipient;\n  }\n\n  function deliver() {\n    selfdestruct(recipient);\n  }\n}\n",
+  "sourcePath": "/Users/tillkolter/.nvm/versions/node/v7.5.0/lib/node_modules/truffle/build/SafeSend.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/Users/tillkolter/.nvm/versions/node/v7.5.0/lib/node_modules/truffle/build/SafeSend.sol",
+      "exportedSymbols": {
+        "SafeSend": [
+          22
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".8"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            22
+          ],
+          "name": "SafeSend",
+          "scope": 23
+        },
+        "children": [
+          {
+            "attributes": {
+              "constant": false,
+              "name": "recipient",
+              "scope": 22,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "address",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "address",
+                  "type": "address"
+                },
+                "id": 2,
+                "name": "ElementaryTypeName",
+                "src": "47:7:0"
+              }
+            ],
+            "id": 3,
+            "name": "VariableDeclaration",
+            "src": "47:24:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": true,
+              "modifiers": [
+                null
+              ],
+              "name": "SafeSend",
+              "payable": true,
+              "scope": 22,
+              "stateMutability": "payable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_recipient",
+                      "scope": 13,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 4,
+                        "name": "ElementaryTypeName",
+                        "src": "96:7:0"
+                      }
+                    ],
+                    "id": 5,
+                    "name": "VariableDeclaration",
+                    "src": "96:18:0"
+                  }
+                ],
+                "id": 6,
+                "name": "ParameterList",
+                "src": "95:20:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 7,
+                "name": "ParameterList",
+                "src": "124:0:0"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "address"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 3,
+                              "type": "address",
+                              "value": "recipient"
+                            },
+                            "id": 8,
+                            "name": "Identifier",
+                            "src": "130:9:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 5,
+                              "type": "address",
+                              "value": "_recipient"
+                            },
+                            "id": 9,
+                            "name": "Identifier",
+                            "src": "142:10:0"
+                          }
+                        ],
+                        "id": 10,
+                        "name": "Assignment",
+                        "src": "130:22:0"
+                      }
+                    ],
+                    "id": 11,
+                    "name": "ExpressionStatement",
+                    "src": "130:22:0"
+                  }
+                ],
+                "id": 12,
+                "name": "Block",
+                "src": "124:33:0"
+              }
+            ],
+            "id": 13,
+            "name": "FunctionDefinition",
+            "src": "78:79:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "deliver",
+              "payable": false,
+              "scope": 22,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 14,
+                "name": "ParameterList",
+                "src": "177:2:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 15,
+                "name": "ParameterList",
+                "src": "180:0:0"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 93,
+                              "type": "function (address)",
+                              "value": "selfdestruct"
+                            },
+                            "id": 16,
+                            "name": "Identifier",
+                            "src": "186:12:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 3,
+                              "type": "address",
+                              "value": "recipient"
+                            },
+                            "id": 17,
+                            "name": "Identifier",
+                            "src": "199:9:0"
+                          }
+                        ],
+                        "id": 18,
+                        "name": "FunctionCall",
+                        "src": "186:23:0"
+                      }
+                    ],
+                    "id": 19,
+                    "name": "ExpressionStatement",
+                    "src": "186:23:0"
+                  }
+                ],
+                "id": 20,
+                "name": "Block",
+                "src": "180:34:0"
+              }
+            ],
+            "id": 21,
+            "name": "FunctionDefinition",
+            "src": "161:53:0"
+          }
+        ],
+        "id": 22,
+        "name": "ContractDefinition",
+        "src": "25:191:0"
+      }
+    ],
+    "id": 23,
+    "name": "SourceUnit",
+    "src": "0:217:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2017-12-15T03:02:42.458Z"
+}
